@@ -1,6 +1,4 @@
 # 💰 Budget Tracker (Fullstack App)
-GitLab link:
-https://gitlab.com/marekbor1-group/expense_tracker
 
 Profesjonalna aplikacja webowa do analizy wydatków domowych, umożliwiająca automatyczne przetwarzanie wyciągów bankowych (CSV) i wizualizację danych.
 
