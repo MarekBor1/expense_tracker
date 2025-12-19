@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from .parser import parse_mbank_csv  # Importujemy Twoją funkcję z parser.py
+from parser import parse_mbank_csv  # Importujemy Twoją funkcję z parser.py
 import uvicorn
 
 app = FastAPI(title="Budget Tracker API")

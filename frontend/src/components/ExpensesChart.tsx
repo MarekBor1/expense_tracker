@@ -30,17 +30,17 @@ export const ExpensesChart = ({ data }: Props) => {
               innerRadius={60}    // Styl Donut
               outerRadius="80%"
               fill="#8884d8"
-              label={({ name, percent }: { name: string; percent: number }) => 
+              label={({ name, percent }: any) => 
                   `${name} ${(percent * 100).toFixed(0)}%`
               }
               labelLine={{ stroke: '#fff' }} 
-              style={{ fill: '#fff', fontSize: '12px' }}
+              style={{ outline: 'none' }}
             >
               {data.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip formatter={(value: number) => `${Number(value).toFixed(2)} PLN`} />
+            <Tooltip formatter={(value: any) => `${Number(value).toFixed(2)} PLN`} />
             <Legend wrapperStyle={{ color: '#fff', fontSize: '12px' }} layout="vertical" align="right" verticalAlign="middle" />
           </PieChart>
         </ResponsiveContainer>

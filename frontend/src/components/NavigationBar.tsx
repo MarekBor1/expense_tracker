@@ -26,7 +26,7 @@ export const NavigationBar = ({ activeTab, setActiveTab }: Props) => {
       display: 'flex', 
       alignItems: 'center', 
       boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
-      marginBottom: '0px' // Zmieniono na 0, żeby pasowało do layoutu full-screen
+      marginBottom: '0px'
     }}>
       <h2 style={{ margin: 0, marginRight: '40px', color: '#fff' }}>💰 Budget Tracker</h2>
       <div>
