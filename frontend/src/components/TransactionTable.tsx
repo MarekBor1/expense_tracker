@@ -2,9 +2,15 @@ import type { Transaction } from '../types/api';
 
 interface Props {
   transactions: Transaction[];
+  startDate: string;
+  endDate: string;
+  setStartDate: (val: string) => void;
+  setEndDate: (val: string) => void;
 }
 
-export const TransactionTable = ({ transactions }: Props) => {
+export const TransactionTable = ({ transactions, startDate, endDate, setStartDate, setEndDate, }: Props) => {
+  const dateInputStyle = { padding: '8px', borderRadius: '5px', border: '1px solid #ccc', marginLeft: '10px' };
+
   return (
     <div style={{ 
       flex: 1, 
@@ -17,6 +23,17 @@ export const TransactionTable = ({ transactions }: Props) => {
     }}>
       <h3 style={{ textAlign: 'center', color: '#fff', margin: '0 0 20px 0' }}>Historia Transakcji</h3>
       
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+            <label style={{ marginRight: '5px', fontWeight: 'bold', color: '#fff' }}>Od:</label>
+            <input type="date" style={dateInputStyle} value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+            <label style={{ marginRight: '5px', fontWeight: 'bold', color: '#fff' }}>Do:</label>
+            <input type="date" style={dateInputStyle} value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
+        </div>
+
+
+
       <div style={{ flex: 1, overflowY: 'auto', paddingRight: '5px' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', color: '#fff' }}>
           <thead style={{ position: 'sticky', top: 0, background: '#333', zIndex: 10, boxShadow: '0 2px 5px rgba(0,0,0,0.5)' }}>

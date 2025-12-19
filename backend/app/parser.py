@@ -43,8 +43,8 @@ def parse_mbank_csv(file_content: bytes):
         if 'HEBE' in desc or 'ROSSMANN' in desc: return 'Uroda'
         
         # Jeśli nie mamy reguły, bierzemy to co dał bank (jeśli sensowne)
-        if bank_cat and bank_cat != 'Nan' and bank_cat != '':
-            return bank_cat
+        # if bank_cat and bank_cat != 'Nan' and bank_cat != '':
+        #     return bank_cat
             
         return 'Inne'
 
@@ -61,7 +61,7 @@ def parse_mbank_csv(file_content: bytes):
     return {
         "total_spent": expenses['Kwota'].sum(),
         "chart_data": chart_data.to_dict(orient='records'),
-        "transactions": df.head(50).to_dict(orient='records') # Zwracamy ostatnie 50 transakcji do tabeli
+        "transactions": df.head(10).to_dict(orient='records') # Zwracamy ostatnie 50 transakcji do tabeli
     }
 
 # Testowe uruchomienie (tylko jeśli odpalasz plik bezpośrednio)

@@ -16,23 +16,24 @@ export const UploadPage = ({ onFileChange, onUpload, loading, error, startDate, 
   const dateInputStyle = { padding: '8px', borderRadius: '5px', border: '1px solid #ccc', marginLeft: '10px' };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '40px auto', textAlign: 'center' }}>
+    <div style={{ width: '100vw', margin: '40px auto', textAlign: 'center' }}>
       <h1 style={{ marginBottom: '30px' }}>Wgraj wyciąg z banku</h1>
       
       <div style={{ 
         display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap',
-        gap: '15px', padding: '40px', background: '#333', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.3)' 
+        gap: '15px', padding: '40px', background: '#333', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.3)' ,
+        width: '50%', margin: '0 auto',
       }}>
         <input type="file" accept=".csv" onChange={onFileChange} style={{ color: '#fff' }} />
         
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        {/* <div style={{ display: 'flex', alignItems: 'center' }}>
             <label style={{ marginRight: '5px', fontWeight: 'bold', color: '#fff' }}>Od:</label>
             <input type="date" style={dateInputStyle} value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <label style={{ marginRight: '5px', fontWeight: 'bold', color: '#fff' }}>Do:</label>
             <input type="date" style={dateInputStyle} value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
-        </div>
+        </div> */}
 
         <div style={{ width: '100%', marginTop: '20px' }}>
           <button 
