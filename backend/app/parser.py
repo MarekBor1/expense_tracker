@@ -35,16 +35,16 @@ def parse_mbank_csv(file_content: bytes):
         bank_cat = str(row['Kategoria']).title() # Oryginalna kategoria z banku
         
         # Twoje własne reguły (mają priorytet nad bankiem)
-        if 'OPENAI' in desc or 'NETFLIX' in desc: return 'Subskrypcje'
-        if 'JAKDOJADE' in desc or 'UBER' in desc: return 'Transport'
+        if 'OPENAI' in desc or 'NETFLIX' in desc or "YOUTUBE": return 'Subskrypcje'
+        if 'JAKDOJADE' in desc or 'BOLT' in desc: return 'Transport'
         if 'BIEDRONKA' in desc or 'LIDL' in desc or 'ŻABKA' in desc: return 'Jedzenie'
         if 'ZEN.COM' in desc or 'REVOLUT' in desc: return 'Finanse'
         if 'VECTRA' in desc: return 'Rachunki'
         if 'HEBE' in desc or 'ROSSMANN' in desc: return 'Uroda'
         
         # Jeśli nie mamy reguły, bierzemy to co dał bank (jeśli sensowne)
-        if bank_cat and bank_cat != 'Nan' and bank_cat != '':
-            return bank_cat
+        # if bank_cat and bank_cat != 'Nan' and bank_cat != '':
+        #     return bank_cat
             
         return 'Inne'
 
@@ -61,11 +61,11 @@ def parse_mbank_csv(file_content: bytes):
     return {
         "total_spent": expenses['Kwota'].sum(),
         "chart_data": chart_data.to_dict(orient='records'),
-        "transactions": df.head(50).to_dict(orient='records') # Zwracamy ostatnie 50 transakcji do tabeli
+        "transactions": df.head(10).to_dict(orient='records') # Zwracamy ostatnie 50 transakcji do tabeli
     }
 
 # Testowe uruchomienie (tylko jeśli odpalasz plik bezpośrednio)
 if __name__ == "__main__":
     with open("twoj_plik.csv", "rb") as f:
         result = parse_mbank_csv(f.read())
-        print(result)
+        

@@ -18,15 +18,28 @@ export const DashboardPage = ({ data, onBackToUpload }: Props) => {
       
       {!data ? (
         // Stan pusty
-        <div style={{ textAlign: 'center', marginTop: '100px' }}>
+        <div style={{ display: 'flex', width: '100vw', textAlign: 'center', marginTop: '100px' }}>
+          {/* TUTA JEST TWOJA RAMKA */}
+            <div style={{ 
+              
+                background: '#333',           // Kolor ramki (taki jak w Upload)
+                padding: '50px',              // Odstęp wewnątrz ramki
+                borderRadius: '15px',         // Zaokrąglone rogi
+                boxShadow: '0 4px 15px rgba(0,0,0,0.5)', 
+                textAlign: 'center',          
+                maxWidth: '600px',            
+                width: '50%',
+                margin: '0 auto',
+            }}>
           <h2 style={{ color: '#aaa' }}>Brak danych do wyświetlenia 😔</h2>
           <button onClick={onBackToUpload} style={{ padding: '15px 30px', background: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '16px' }}>
             ⬅️ Wróć i wgraj plik
           </button>
         </div>
+        </div>
       ) : (
         // Dashboard z danymi
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '90%', width: 'calc(100vw - 60px)' }}>
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <h2 style={{ margin: 0, fontSize: '24px', color: '#fff' }}>
                 Wydano łącznie: <span style={{ color: '#ff6b6b' }}>{data.total_spent.toFixed(2)} PLN</span>
