@@ -35,8 +35,8 @@ def parse_mbank_csv(file_content: bytes):
         bank_cat = str(row['Kategoria']).title() # Oryginalna kategoria z banku
         
         # Twoje własne reguły (mają priorytet nad bankiem)
-        if 'OPENAI' in desc or 'NETFLIX' in desc: return 'Subskrypcje'
-        if 'JAKDOJADE' in desc or 'UBER' in desc: return 'Transport'
+        if 'OPENAI' in desc or 'NETFLIX' in desc or "YOUTUBE": return 'Subskrypcje'
+        if 'JAKDOJADE' in desc or 'BOLT' in desc: return 'Transport'
         if 'BIEDRONKA' in desc or 'LIDL' in desc or 'ŻABKA' in desc: return 'Jedzenie'
         if 'ZEN.COM' in desc or 'REVOLUT' in desc: return 'Finanse'
         if 'VECTRA' in desc: return 'Rachunki'
@@ -68,4 +68,4 @@ def parse_mbank_csv(file_content: bytes):
 if __name__ == "__main__":
     with open("twoj_plik.csv", "rb") as f:
         result = parse_mbank_csv(f.read())
-        print(result)
+        
