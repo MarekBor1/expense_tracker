@@ -35,10 +35,11 @@ def parse_mbank_csv(file_content: bytes):
         bank_cat = str(row['Kategoria']).title() # Oryginalna kategoria z banku
         
         # Twoje własne reguły (mają priorytet nad bankiem)
-        if 'OPENAI' in desc or 'NETFLIX' in desc or "YOUTUBE": return 'Subskrypcje'
+        if 'OPENAI' in desc or 'NETFLIX' in desc or "YOUTUBE" in desc: return 'Subskrypcje'
         if 'JAKDOJADE' in desc or 'BOLT' in desc: return 'Transport'
         if 'BIEDRONKA' in desc or 'LIDL' in desc or 'ŻABKA' in desc: return 'Jedzenie'
         if 'ZEN.COM' in desc or 'REVOLUT' in desc: return 'Finanse'
+        if 'AVIVA' in desc: return 'Inwestycje'
         if 'VECTRA' in desc: return 'Rachunki'
         if 'HEBE' in desc or 'ROSSMANN' in desc: return 'Uroda'
         
@@ -61,7 +62,7 @@ def parse_mbank_csv(file_content: bytes):
     return {
         "total_spent": expenses['Kwota'].sum(),
         "chart_data": chart_data.to_dict(orient='records'),
-        "transactions": df.head(10).to_dict(orient='records') # Zwracamy ostatnie 50 transakcji do tabeli
+        "transactions": df.head(50).to_dict(orient='records') # Zwracamy ostatnie 50 transakcji do tabeli
     }
 
 # Testowe uruchomienie (tylko jeśli odpalasz plik bezpośrednio)

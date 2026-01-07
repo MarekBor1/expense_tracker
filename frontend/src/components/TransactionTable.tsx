@@ -2,14 +2,8 @@ import type { Transaction } from '../types/api';
 
 interface Props {
   transactions: Transaction[];
-  startDate: string;
-  endDate: string;
-  setStartDate: (val: string) => void;
-  setEndDate: (val: string) => void;
 }
-
-export const TransactionTable = ({ transactions, startDate, endDate, setStartDate, setEndDate, }: Props) => {
-  const dateInputStyle = { padding: '8px', borderRadius: '5px', border: '1px solid #ccc', marginLeft: '10px' };
+export const TransactionTable = ({ transactions }: Props) => {
 
   return (
     <div style={{ 
@@ -25,11 +19,9 @@ export const TransactionTable = ({ transactions, startDate, endDate, setStartDat
       
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <label style={{ marginRight: '5px', fontWeight: 'bold', color: '#fff' }}>Od:</label>
-            <input type="date" style={dateInputStyle} value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <label style={{ marginRight: '5px', fontWeight: 'bold', color: '#fff' }}>Do:</label>
-            <input type="date" style={dateInputStyle} value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
         </div>
 
 
