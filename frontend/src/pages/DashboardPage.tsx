@@ -1,6 +1,8 @@
 import type { AnalysisResult } from '../types/api';
 import { ExpensesChart } from '../components/ExpensesChart';
 import { TransactionTable } from '../components/TransactionTable';
+import { DateFilters } from '../components/DateFilters'
+import { useState, useMemo } from 'react';
 
 interface Props {
   data: AnalysisResult | null;
@@ -8,10 +10,25 @@ interface Props {
 }
 
 export const DashboardPage = ({ data, onBackToUpload }: Props) => {
+
+  const [startDate, setStartDate] = useState(''); // ADD default date later!!!
+  const [endDate, setEndDate] = useState(''); // ADD default date later!!!
+
+  const filteredTransactions = useMemo(() => {
+    if (!data) return [];
+
+    return data.transactions.filter(t => {
+      const transactionDate = t['Data operacji'];
+      if (startDate && transactionDate < startDate) return false;
+      if (endDate && transactionDate > endDate) return false;
+      return true;
+    });
+  }, [data, startDate, endDate]);  
+
   return (
     <div style={{ 
       padding: '20px', 
-      height: 'calc(100vh - 80px)', // Full screen minus navbar
+      height: 'calc(100vh - 80px)', 
       display: 'flex', 
       flexDirection: 'column' 
     }}>
@@ -19,12 +36,11 @@ export const DashboardPage = ({ data, onBackToUpload }: Props) => {
       {!data ? (
         // Stan pusty
         <div style={{ display: 'flex', width: '100vw', textAlign: 'center', marginTop: '100px' }}>
-          {/* TUTA JEST TWOJA RAMKA */}
             <div style={{ 
               
-                background: '#333',           // Kolor ramki (taki jak w Upload)
-                padding: '50px',              // Odstęp wewnątrz ramki
-                borderRadius: '15px',         // Zaokrąglone rogi
+                background: '#333', 
+                padding: '50px',              
+                borderRadius: '15px',         
                 boxShadow: '0 4px 15px rgba(0,0,0,0.5)', 
                 textAlign: 'center',          
                 maxWidth: '600px',            
@@ -38,7 +54,7 @@ export const DashboardPage = ({ data, onBackToUpload }: Props) => {
         </div>
         </div>
       ) : (
-        // Dashboard z danymi
+        // Dashboard
         <div style={{ display: 'flex', flexDirection: 'column', height: '90%', width: 'calc(100vw - 60px)' }}>
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <h2 style={{ margin: 0, fontSize: '24px', color: '#fff' }}>
@@ -46,9 +62,16 @@ export const DashboardPage = ({ data, onBackToUpload }: Props) => {
               </h2>
           </div>
 
+          <DateFilters 
+            startDate={startDate}
+            endDate={endDate}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+          />
+
           <div style={{ display: 'flex', flex: 1, gap: '20px', minHeight: 0 }}>
              <ExpensesChart data={data.chart_data} />
-             <TransactionTable transactions={data.transactions} />
+             <TransactionTable transactions={filteredTransactions} />
           </div>
         </div>
       )}
