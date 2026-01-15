@@ -25,6 +25,28 @@ export const DashboardPage = ({ data, onBackToUpload }: Props) => {
     });
   }, [data, startDate, endDate]);  
 
+  
+  const currentTotal = useMemo(() => {
+    return filteredTransactions.reduce((sum, t) => sum + Math.abs(t.Kwota), 0);
+  }, [filteredTransactions]);
+
+  
+  const currentChartData = useMemo(() => {
+    
+    const categorySums: Record<string, number> = {};
+
+    filteredTransactions.forEach(t => {
+      const cat = t.Kategoria_System || 'Inne';
+      const val = Math.abs(t.Kwota);
+      categorySums[cat] = (categorySums[cat] || 0) + val;
+    });
+
+    
+    return Object.entries(categorySums)
+      .map(([Kategoria_System, Kwota]) => ({ Kategoria_System, Kwota }))
+      .sort((a, b) => b.Kwota - a.Kwota);
+  }, [filteredTransactions]);
+
   return (
     <div style={{ 
       padding: '20px', 
@@ -58,7 +80,10 @@ export const DashboardPage = ({ data, onBackToUpload }: Props) => {
         <div style={{ display: 'flex', flexDirection: 'column', height: '90%', width: 'calc(100vw - 60px)' }}>
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <h2 style={{ margin: 0, fontSize: '24px', color: '#fff' }}>
-                Wydano łącznie: <span style={{ color: '#ff6b6b' }}>{data.total_spent.toFixed(2)} PLN</span>
+                Wydano {startDate || endDate ? 'w wybranym okresie' : 'łącznie'}: 
+                <span style={{ color: '#ff6b6b', marginLeft: '10px' }}>
+                   {currentTotal.toFixed(2)} PLN
+                </span>
               </h2>
           </div>
 
@@ -70,7 +95,7 @@ export const DashboardPage = ({ data, onBackToUpload }: Props) => {
           />
 
           <div style={{ display: 'flex', flex: 1, gap: '20px', minHeight: 0 }}>
-             <ExpensesChart data={data.chart_data} />
+             <ExpensesChart data={currentChartData} />
              <TransactionTable transactions={filteredTransactions} />
           </div>
         </div>
