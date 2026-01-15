@@ -56,7 +56,7 @@ export const DashboardPage = ({ data, onBackToUpload }: Props) => {
     }}>
       
       {!data ? (
-        // Stan pusty
+        // No data state
         <div style={{ display: 'flex', width: '100vw', textAlign: 'center', marginTop: '100px' }}>
             <div style={{ 
               

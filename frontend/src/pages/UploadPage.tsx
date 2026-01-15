@@ -12,8 +12,8 @@ interface Props {
   fileSelected: boolean;
 }
 
-export const UploadPage = ({ onFileChange, onUpload, loading, error, startDate, endDate, setStartDate, setEndDate, fileSelected }: Props) => {
-  const dateInputStyle = { padding: '8px', borderRadius: '5px', border: '1px solid #ccc', marginLeft: '10px' };
+export const UploadPage = ({ onFileChange, onUpload, loading, error, fileSelected }: Props) => {
+  
 
   return (
     <div style={{ width: '100vw', margin: '40px auto', textAlign: 'center' }}>
@@ -26,14 +26,6 @@ export const UploadPage = ({ onFileChange, onUpload, loading, error, startDate, 
       }}>
         <input type="file" accept=".csv" onChange={onFileChange} style={{ color: '#fff' }} />
         
-        {/* <div style={{ display: 'flex', alignItems: 'center' }}>
-            <label style={{ marginRight: '5px', fontWeight: 'bold', color: '#fff' }}>Od:</label>
-            <input type="date" style={dateInputStyle} value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-            <label style={{ marginRight: '5px', fontWeight: 'bold', color: '#fff' }}>Do:</label>
-            <input type="date" style={dateInputStyle} value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
-        </div> */}
 
         <div style={{ width: '100%', marginTop: '20px' }}>
           <button 
