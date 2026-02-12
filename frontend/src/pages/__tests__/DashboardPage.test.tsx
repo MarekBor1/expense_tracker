@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { DashboardPage } from './DashboardPage';
+import { DashboardPage } from '../DashboardPage';
 import '@testing-library/jest-dom';
 
 // Mock child components to isolate DashboardPage logic

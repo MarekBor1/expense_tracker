@@ -3,6 +3,8 @@ import { ExpensesChart } from '../components/ExpensesChart';
 import { TransactionTable } from '../components/TransactionTable';
 import { DateFilters } from '../components/DateFilters'
 import { useState, useMemo } from 'react';
+import { getFirstDayOfMonth, getTodayDate } from '../utils/dateHelpers';
+
 
 interface Props {
   data: AnalysisResult | null;
@@ -11,8 +13,8 @@ interface Props {
 
 export const DashboardPage = ({ data, onBackToUpload }: Props) => {
 
-  const [startDate, setStartDate] = useState(''); // ADD default date later!!!
-  const [endDate, setEndDate] = useState(''); // ADD default date later!!!
+  const [startDate, setStartDate] = useState(() => getFirstDayOfMonth()); 
+  const [endDate, setEndDate] = useState(() => getTodayDate()); 
 
   const filteredTransactions = useMemo(() => {
     if (!data) return [];
