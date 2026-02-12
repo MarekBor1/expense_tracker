@@ -1,11 +1,11 @@
 
 interface Props {
-  activeTab: 'upload' | 'dashboard';
-  setActiveTab: (tab: 'upload' | 'dashboard') => void;
+  activeTab: 'upload' | 'dashboard' | 'budget';
+  setActiveTab: (tab: 'upload' | 'dashboard'| 'budget') => void;
 }
 
 export const NavigationBar = ({ activeTab, setActiveTab }: Props) => {
-  const getTabStyle = (tabName: 'upload' | 'dashboard') => ({
+  const getTabStyle = (tabName: 'upload' | 'dashboard'| 'budget') => ({
     padding: '10px 20px',
     cursor: 'pointer',
     background: activeTab === tabName ? '#007bff' : 'transparent',
@@ -34,6 +34,9 @@ export const NavigationBar = ({ activeTab, setActiveTab }: Props) => {
         </button>
         <button onClick={() => setActiveTab('dashboard')} style={getTabStyle('dashboard')}>
           📊 Wykresy i Dane
+        </button>
+                <button onClick={() => setActiveTab('budget')} style={getTabStyle('budget')}>
+          📊 Cele 
         </button>
       </div>
     </nav>
